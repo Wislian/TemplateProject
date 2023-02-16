@@ -10,6 +10,7 @@
 #include "glsl.h"
 #include <time.h>
 #include "Triangulos.h"
+#include "Cola.h"
 //-----------------------------------------------------------------------------
 
 
@@ -23,6 +24,7 @@ protected:
    float timer010;  // timer counting 0->1->0
    bool bUp;        // flag if counting up or down.
    Triangulos* miTriangulo;
+   Cola* miCola;
 
 public:
 	myWindow(){}
@@ -42,7 +44,8 @@ public:
          //transformaciones globales
          //rotacion global a todos los objetos
          //glRotatef(timer010*360, 0.5, 1.0f, 0.1f);
-         glTranslatef(0, 0, -5);
+         glTranslatef(0, 0, -15);
+         /*
 
          glPushMatrix();
          glutSolidSphere(0.5, 20,20);
@@ -73,6 +76,18 @@ public:
          glPopMatrix();
 
          miTriangulo->DibujarTriangulos(0,2,0);
+         */
+         //cola
+         miCola->dibujarCola(0.25,0.5, 0.4,90,25, 7, -2, 2, 0);
+         miCola->dibujarCola(0.25, 0.5, 0.4, 90, 0, 7, -2, -2, 0);
+         miCola->dibujarCola(0.25, 0.5, 0.4, -90,25, 7, -2, -2, 0);
+         //cuerpo
+         miCola->dibujarCola(0.5, 1, 0.4, 90, 25, 25, 4.5, -1, 0);
+         //cabeza
+         miCola->dibujarCola(0.25, 0.25, 0.2, 90, 25, 30, 4, 3.5, 0);
+         //brazos
+         miCola->dibujarCola(0.25, 0.5, 0.4, -90, 10, 7, 5, -1, 0);
+         miCola->dibujarCola(0.25, 0.5, 0.4, 90, 10, 7, 0, 1, 0);
 
          glPopMatrix();
       if (shader) shader->end();
@@ -91,6 +106,7 @@ public:
 	virtual void OnInit()
 	{
         miTriangulo = new Triangulos();
+        miCola = new Cola();
 		glClearColor(0.5f, 0.5f, 1.0f, 0.0f);
 		glShadeModel(GL_SMOOTH);
 		glEnable(GL_DEPTH_TEST);
